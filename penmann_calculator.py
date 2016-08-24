@@ -193,7 +193,7 @@ class pen_daily:
 #######################################################################################################################################        
 class pen_hourly:
     '''
-    calculate daily ET as it is described in the FAO paper Irrigation and
+    calculate hourly ET as it is described in the FAO paper Irrigation and
     drainage paper number 56 and displayed in example 19   
     http://www.kimberly.uidaho.edu/water/fao56/fao56.pdf
     '''
