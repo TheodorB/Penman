@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/home/theodor/anaconda2/bin/python
 """
 Created on Sun Dec  6 10:12:46 2015
 
@@ -35,6 +35,7 @@ class pen_daily:
         self.phi    = math.radians(float(lat)) # decimal degrees to radians
         self.albedo = 0.23              # albedo
         self.G      = 0.0               # soil heat flux ~ 0 for daily ET 
+        
     def t_mean(self): # [eq. 9]
         '''
         temp. mean of extremes
@@ -197,7 +198,7 @@ class pen_hourly:
     drainage paper number 56 and displayed in example 19   
     http://www.kimberly.uidaho.edu/water/fao56/fao56.pdf
     '''
-    def __init__(self, T, RH, u, Rs, timestamp, alt, lon, lat): 
+    def __init__(self, T, RH, u, Rs, timestamp, lon, lat, alt, p=False): 
         '''
         These are all hourly parameters - e.g: data for 14:00 is
         the mean or sum (for rain) of 14:00 - 14:59:59
@@ -205,6 +206,7 @@ class pen_hourly:
         alt in [m]
         lat and lon in decimal degrees
         Lz and Lm written for Israel timezone
+        p = surface pressure
         '''
         self.T      = float(T)          # mean hourly temp (C)
         self.RH     = float(RH)         # mean hourly RH(%)
@@ -214,7 +216,7 @@ class pen_hourly:
         self.doy    = timestamp.timetuple().tm_yday # day of year
         self.month  = timestamp.month   # month
         self.hour   = timestamp.hour    # hour
-        self.alt    = float(alt)        # elevation of location(m)
+        self.alt = float(alt)        # altitude of location(m)
         self.Gsc    = 0.0820            # solar constant [MJ m-2 min-1]
         self.sigma  = 2.043E-10         # Stefan-Bpltzman constant [MJK-4 m-2 h-1]
         self.phi    = math.radians(float(lat)) # decimal degrees to radians 
@@ -222,8 +224,12 @@ class pen_hourly:
         self.Lz     = 330.0 # longitude of the centre of the local time zone (for Israel) [degrees west of Greenwich]
         self.Lm     = 360.0 - float(lon)  # longitude of the measurement site [degrees west of Greenwich], 
                                           # if Israel lon is decimal deg east of Greenwich 
+        if p != False: # if we have altitude data (not False)
+            self.p = float(p)        # surface pressure (kPa)
+        else:
+            self.p = bool(p)
 #        self.Lm     = (lon)  # longitude of the measurement site [degrees west of Greenwich]
-
+        
         return
         
     def dr(self): # [eq.23]
@@ -358,9 +364,13 @@ class pen_hourly:
         '''
         function that calculates pressure
         based on altitude returns pressure [kPa]
-        '''
-        p1 = (293-0.0065*self.alt)/293
-        return 101.3*(p1**5.26)
+        '''      
+        if self.p != False:
+            pressure = self.p
+        else:
+            p1 = (293-0.0065*self.alt)/293.0
+            pressure = 101.3*(p1**5.26) 
+        return pressure
         
     def vp_defic(self):  
         '''
@@ -422,6 +432,34 @@ def adjust_ws(u,z):
     '''
     u2 = u * 4.87/(math.log(67.8 * z - 5.42))
     return u2
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
