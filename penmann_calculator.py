@@ -19,7 +19,10 @@ class pen_daily:
         These are all daily parameters - max, min or mean as mentioned
         alt in [m]
         lat in decimal degrees
+        !!! timestamp is UTC as input and corrected to UTC+2 by default        
         '''
+        timestamp = timestamp + datetime.timedelta(hours=2) #UTC to URC+2 (for Israel)
+#        timestamp = timestamp.tz_convert('Israel')
         self.Tmax   = float(Tmax)       # daily max temp (C)
         self.Tmin   = float(Tmin)       # daily min temp (C)
         self.RHmax  = float(RHmax)      # daily max RH(%)
@@ -207,9 +210,13 @@ class pen_hourly:
         lat and lon in decimal degrees
         Lz and Lm written for Israel timezone
         p = surface pressure
+        !!! timestamp is UTC as input and corrected to UTC+2 by default        
         '''
+#        print('IS TIMESTAMP UTC TIME??? - Check please')
+        
+        timestamp = timestamp + datetime.timedelta(hours=2) #UTC to URC+2
         self.T      = float(T)          # mean hourly temp (C)
-        self.RH     = float(RH)         # mean hourly RH(%)
+        self.RH     = float(RH)         # mean hourly RH at 2m(%)
         self.u      = float(u)          # hourly mean wind speed at 2m
         self.Rs     = Rs*3.6E-3         # short radiation [Wm-2] to [MJm-2*h-1] (daily mean)
         self.year   = timestamp.year    # year
@@ -307,7 +314,7 @@ class pen_hourly:
         e_a = self.e_a() 
         p1 = (T + 273.16)**4.0 
         if e_a < 0.0:
-            print 'e_a < 0'
+            print ('e_a < 0')
         p2 = 0.34 - 0.14*math.sqrt(e_a)
         if Rs>Rso:
             p3 = 1
@@ -432,34 +439,6 @@ def adjust_ws(u,z):
     '''
     u2 = u * 4.87/(math.log(67.8 * z - 5.42))
     return u2
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
