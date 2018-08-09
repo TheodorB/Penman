@@ -231,7 +231,7 @@ class pen_hourly:
         self.Lz     = 330.0 # longitude of the centre of the local time zone (for Israel) [degrees west of Greenwich]
         self.Lm     = 360.0 - float(lon)  # longitude of the measurement site [degrees west of Greenwich], 
                                           # if Israel lon is decimal deg east of Greenwich 
-        if p != False: # if we have altitude data (not False)
+        if p != False: # if we have pressure data (not False)
             self.p = float(p)        # surface pressure (kPa)
         else:
             self.p = bool(p)
