@@ -210,7 +210,7 @@ class pen_hourly:
         lat and lon in decimal degrees
         Lz and Lm written for Israel timezone
         p = surface pressure
-        !!! timestamp is UTC as input and corrected to UTC+2 by default        
+        !!! timestamp is UTC as input and corrected to UTC+2 (Israel time) by default        
         '''
 #        print('IS TIMESTAMP UTC TIME??? - Check please')
         
@@ -442,28 +442,4 @@ def adjust_ws(u,z):
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+  
