@@ -1,4 +1,4 @@
-#!/home/theodor/anaconda2/bin/python
+#!/home/theodor/anaconda3/bin/python
 """
 Created on Sun Dec  6 10:12:46 2015
 
