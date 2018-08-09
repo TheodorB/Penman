@@ -19,7 +19,7 @@ class pen_daily:
         These are all daily parameters - max, min or mean as mentioned
         alt in [m]
         lat in decimal degrees
-        !!! timestamp is UTC as input and corrected to UTC+2 by default        
+        !!! timestamp is UTC as input and corrected to UTC+2 (Israel time) by default        
         '''
         timestamp = timestamp + datetime.timedelta(hours=2) #UTC to URC+2 (for Israel)
 #        timestamp = timestamp.tz_convert('Israel')
